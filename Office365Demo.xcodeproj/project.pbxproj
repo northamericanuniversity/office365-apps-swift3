@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		59EBD2F91D186156009E6C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD2F81D186156009E6C2F /* AppDelegate.swift */; };
+		59EBD2FB1D186156009E6C2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD2FA1D186156009E6C2F /* ViewController.swift */; };
+		59EBD2FE1D186156009E6C2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59EBD2FC1D186156009E6C2F /* Main.storyboard */; };
+		59EBD3001D186156009E6C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59EBD2FF1D186156009E6C2F /* Assets.xcassets */; };
+		59EBD3031D186156009E6C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59EBD3011D186156009E6C2F /* LaunchScreen.storyboard */; };
+		59EBD30E1D186156009E6C2F /* Office365DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD30D1D186156009E6C2F /* Office365DemoTests.swift */; };
+		59EBD3191D186156009E6C2F /* Office365DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD3181D186156009E6C2F /* Office365DemoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		59EBD30A1D186156009E6C2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59EBD2ED1D186156009E6C2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 59EBD2F41D186156009E6C2F;
+			remoteInfo = Office365Demo;
+		};
+		59EBD3151D186156009E6C2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59EBD2ED1D186156009E6C2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 59EBD2F41D186156009E6C2F;
+			remoteInfo = Office365Demo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		59EBD2F51D186156009E6C2F /* Office365Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Office365Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		59EBD2F81D186156009E6C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		59EBD2FA1D186156009E6C2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		59EBD2FD1D186156009E6C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		59EBD2FF1D186156009E6C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		59EBD3021D186156009E6C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		59EBD3041D186156009E6C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59EBD3091D186156009E6C2F /* Office365DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Office365DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59EBD30D1D186156009E6C2F /* Office365DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Office365DemoTests.swift; sourceTree = "<group>"; };
+		59EBD30F1D186156009E6C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59EBD3141D186156009E6C2F /* Office365DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Office365DemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59EBD3181D186156009E6C2F /* Office365DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Office365DemoUITests.swift; sourceTree = "<group>"; };
+		59EBD31A1D186156009E6C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		59EBD2F21D186156009E6C2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EBD3061D186156009E6C2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EBD3111D186156009E6C2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		59EBD2EC1D186156009E6C2F = {
+			isa = PBXGroup;
+			children = (
+				59EBD2F71D186156009E6C2F /* Office365Demo */,
+				59EBD30C1D186156009E6C2F /* Office365DemoTests */,
+				59EBD3171D186156009E6C2F /* Office365DemoUITests */,
+				59EBD2F61D186156009E6C2F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		59EBD2F61D186156009E6C2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				59EBD2F51D186156009E6C2F /* Office365Demo.app */,
+				59EBD3091D186156009E6C2F /* Office365DemoTests.xctest */,
+				59EBD3141D186156009E6C2F /* Office365DemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		59EBD2F71D186156009E6C2F /* Office365Demo */ = {
+			isa = PBXGroup;
+			children = (
+				59EBD2F81D186156009E6C2F /* AppDelegate.swift */,
+				59EBD2FA1D186156009E6C2F /* ViewController.swift */,
+				59EBD2FC1D186156009E6C2F /* Main.storyboard */,
+				59EBD2FF1D186156009E6C2F /* Assets.xcassets */,
+				59EBD3011D186156009E6C2F /* LaunchScreen.storyboard */,
+				59EBD3041D186156009E6C2F /* Info.plist */,
+			);
+			path = Office365Demo;
+			sourceTree = "<group>";
+		};
+		59EBD30C1D186156009E6C2F /* Office365DemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				59EBD30D1D186156009E6C2F /* Office365DemoTests.swift */,
+				59EBD30F1D186156009E6C2F /* Info.plist */,
+			);
+			path = Office365DemoTests;
+			sourceTree = "<group>";
+		};
+		59EBD3171D186156009E6C2F /* Office365DemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				59EBD3181D186156009E6C2F /* Office365DemoUITests.swift */,
+				59EBD31A1D186156009E6C2F /* Info.plist */,
+			);
+			path = Office365DemoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		59EBD2F41D186156009E6C2F /* Office365Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59EBD31D1D186156009E6C2F /* Build configuration list for PBXNativeTarget "Office365Demo" */;
+			buildPhases = (
+				59EBD2F11D186156009E6C2F /* Sources */,
+				59EBD2F21D186156009E6C2F /* Frameworks */,
+				59EBD2F31D186156009E6C2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Office365Demo;
+			productName = Office365Demo;
+			productReference = 59EBD2F51D186156009E6C2F /* Office365Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		59EBD3081D186156009E6C2F /* Office365DemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59EBD3201D186156009E6C2F /* Build configuration list for PBXNativeTarget "Office365DemoTests" */;
+			buildPhases = (
+				59EBD3051D186156009E6C2F /* Sources */,
+				59EBD3061D186156009E6C2F /* Frameworks */,
+				59EBD3071D186156009E6C2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				59EBD30B1D186156009E6C2F /* PBXTargetDependency */,
+			);
+			name = Office365DemoTests;
+			productName = Office365DemoTests;
+			productReference = 59EBD3091D186156009E6C2F /* Office365DemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		59EBD3131D186156009E6C2F /* Office365DemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59EBD3231D186156009E6C2F /* Build configuration list for PBXNativeTarget "Office365DemoUITests" */;
+			buildPhases = (
+				59EBD3101D186156009E6C2F /* Sources */,
+				59EBD3111D186156009E6C2F /* Frameworks */,
+				59EBD3121D186156009E6C2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				59EBD3161D186156009E6C2F /* PBXTargetDependency */,
+			);
+			name = Office365DemoUITests;
+			productName = Office365DemoUITests;
+			productReference = 59EBD3141D186156009E6C2F /* Office365DemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		59EBD2ED1D186156009E6C2F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Mehmet Sen";
+				TargetAttributes = {
+					59EBD2F41D186156009E6C2F = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					59EBD3081D186156009E6C2F = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 59EBD2F41D186156009E6C2F;
+					};
+					59EBD3131D186156009E6C2F = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 59EBD2F41D186156009E6C2F;
+					};
+				};
+			};
+			buildConfigurationList = 59EBD2F01D186156009E6C2F /* Build configuration list for PBXProject "Office365Demo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 59EBD2EC1D186156009E6C2F;
+			productRefGroup = 59EBD2F61D186156009E6C2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				59EBD2F41D186156009E6C2F /* Office365Demo */,
+				59EBD3081D186156009E6C2F /* Office365DemoTests */,
+				59EBD3131D186156009E6C2F /* Office365DemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		59EBD2F31D186156009E6C2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59EBD3031D186156009E6C2F /* LaunchScreen.storyboard in Resources */,
+				59EBD3001D186156009E6C2F /* Assets.xcassets in Resources */,
+				59EBD2FE1D186156009E6C2F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EBD3071D186156009E6C2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EBD3121D186156009E6C2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		59EBD2F11D186156009E6C2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59EBD2FB1D186156009E6C2F /* ViewController.swift in Sources */,
+				59EBD2F91D186156009E6C2F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EBD3051D186156009E6C2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59EBD30E1D186156009E6C2F /* Office365DemoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EBD3101D186156009E6C2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59EBD3191D186156009E6C2F /* Office365DemoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		59EBD30B1D186156009E6C2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 59EBD2F41D186156009E6C2F /* Office365Demo */;
+			targetProxy = 59EBD30A1D186156009E6C2F /* PBXContainerItemProxy */;
+		};
+		59EBD3161D186156009E6C2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 59EBD2F41D186156009E6C2F /* Office365Demo */;
+			targetProxy = 59EBD3151D186156009E6C2F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		59EBD2FC1D186156009E6C2F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				59EBD2FD1D186156009E6C2F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		59EBD3011D186156009E6C2F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				59EBD3021D186156009E6C2F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		59EBD31B1D186156009E6C2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		59EBD31C1D186156009E6C2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		59EBD31E1D186156009E6C2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Office365Demo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = sample.Office365Demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		59EBD31F1D186156009E6C2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Office365Demo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = sample.Office365Demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		59EBD3211D186156009E6C2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = Office365DemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = sample.Office365DemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Office365Demo.app/Office365Demo";
+			};
+			name = Debug;
+		};
+		59EBD3221D186156009E6C2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = Office365DemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = sample.Office365DemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Office365Demo.app/Office365Demo";
+			};
+			name = Release;
+		};
+		59EBD3241D186156009E6C2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Office365DemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = sample.Office365DemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Office365Demo;
+			};
+			name = Debug;
+		};
+		59EBD3251D186156009E6C2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Office365DemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = sample.Office365DemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Office365Demo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		59EBD2F01D186156009E6C2F /* Build configuration list for PBXProject "Office365Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59EBD31B1D186156009E6C2F /* Debug */,
+				59EBD31C1D186156009E6C2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59EBD31D1D186156009E6C2F /* Build configuration list for PBXNativeTarget "Office365Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59EBD31E1D186156009E6C2F /* Debug */,
+				59EBD31F1D186156009E6C2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		59EBD3201D186156009E6C2F /* Build configuration list for PBXNativeTarget "Office365DemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59EBD3211D186156009E6C2F /* Debug */,
+				59EBD3221D186156009E6C2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		59EBD3231D186156009E6C2F /* Build configuration list for PBXNativeTarget "Office365DemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59EBD3241D186156009E6C2F /* Debug */,
+				59EBD3251D186156009E6C2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 59EBD2ED1D186156009E6C2F /* Project object */;
+}
