@@ -31,8 +31,6 @@ import Foundation
 
 // You will set your application's clientId and redirect URI. You get
 // these when you register your application in Azure AD.
-//let REDIRECT_URL_STRING = "http://xtalkapp.com/office365clientios/oauth2.php"
-//let CLIENT_ID           = "8f59d4e7-e940-40c0-8498-06c751e40551"
 let REDIRECT_URL_STRING = "http://example.com"
 let CLIENT_ID           = "CLIENT-ID"
 let AUTHORITY           = "https://login.microsoftonline.com/common"
