@@ -1,25 +1,315 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8Hf-Gg-a65">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Login View Controller-->
+        <scene sceneID="hrf-MQ-fey">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginView" title="Login View Controller" id="8Hf-Gg-a65" customClass="LoginViewController" customModule="Office365Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="VGD-HJ-zk4"/>
+                        <viewControllerLayoutGuide type="bottom" id="wyA-Td-W8s"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="36k-ts-zrN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtV-Ue-x47" customClass="Office365LoginButton" customModule="Office365Demo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="456" width="288" height="44"/>
+                                <color key="backgroundColor" red="0.0" green="0.3924765939" blue="0.61647812970000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="hEM-FN-DaF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Sign in with Office 365">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="connectToOffice365:" destination="8Hf-Gg-a65" eventType="touchUpInside" id="gUT-6y-GEO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.31372549020000001" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="wyA-Td-W8s" firstAttribute="top" secondItem="dtV-Ue-x47" secondAttribute="bottom" constant="68" id="E9l-Gg-U3N"/>
+                            <constraint firstItem="dtV-Ue-x47" firstAttribute="leading" secondItem="36k-ts-zrN" secondAttribute="leadingMargin" id="aIB-Cp-zw6"/>
+                            <constraint firstItem="dtV-Ue-x47" firstAttribute="trailing" secondItem="36k-ts-zrN" secondAttribute="trailingMargin" id="jhw-H5-NfI"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lzo-fV-iJ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-130" y="100"/>
+        </scene>
+        <!--Inbox View Controller-->
+        <scene sceneID="UP9-Ke-9eQ">
+            <objects>
+                <viewController id="QOB-lx-ACh" customClass="InboxViewController" customModule="Office365Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zKL-NJ-5Rw"/>
+                        <viewControllerLayoutGuide type="bottom" id="CSF-fx-kcd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BXu-tD-uuD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hSU-kn-xE6">
+                                <rect key="frame" x="16" y="199" width="288" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="pVQ-EM-Dao"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Smh-N0-xxG">
+                                <rect key="frame" x="150" y="311" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="4JQ-uQ-ICR"/>
+                                    <constraint firstAttribute="width" constant="20" id="QUR-uN-RDD"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qih-eg-gsu">
+                                <rect key="frame" x="140" y="248" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="5d4-cu-P7M"/>
+                                    <constraint firstAttribute="height" constant="40" id="OpQ-bc-RfQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendEmailMessage:" destination="QOB-lx-ACh" eventType="touchUpInside" id="bFk-sz-ELo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEe-ZV-TGD">
+                                <rect key="frame" x="12" y="370" width="296" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="5C0-uK-kET"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.31372549020000001" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="qih-eg-gsu" firstAttribute="top" secondItem="hSU-kn-xE6" secondAttribute="bottom" constant="19" id="0Gc-I6-aRl"/>
+                            <constraint firstItem="hSU-kn-xE6" firstAttribute="trailing" secondItem="BXu-tD-uuD" secondAttribute="trailingMargin" id="0zq-NE-3Fa"/>
+                            <constraint firstItem="fEe-ZV-TGD" firstAttribute="leading" secondItem="BXu-tD-uuD" secondAttribute="leadingMargin" constant="-4" id="6h3-ul-chS"/>
+                            <constraint firstItem="Smh-N0-xxG" firstAttribute="centerX" secondItem="BXu-tD-uuD" secondAttribute="centerX" id="9s2-xp-yav"/>
+                            <constraint firstItem="fEe-ZV-TGD" firstAttribute="top" secondItem="Smh-N0-xxG" secondAttribute="bottom" constant="39" id="C50-Qb-oBQ"/>
+                            <constraint firstItem="hSU-kn-xE6" firstAttribute="leading" secondItem="BXu-tD-uuD" secondAttribute="leadingMargin" id="Els-YE-7NP"/>
+                            <constraint firstItem="hSU-kn-xE6" firstAttribute="top" secondItem="zKL-NJ-5Rw" secondAttribute="bottom" constant="135" id="Ktq-xE-Jvt"/>
+                            <constraint firstItem="Smh-N0-xxG" firstAttribute="top" secondItem="qih-eg-gsu" secondAttribute="bottom" constant="23" id="XKW-Gq-Pj4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fEe-ZV-TGD" secondAttribute="trailing" constant="-4" id="w9j-Hc-s5g"/>
+                            <constraint firstItem="qih-eg-gsu" firstAttribute="centerX" secondItem="BXu-tD-uuD" secondAttribute="centerX" id="wtZ-HE-n7p"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="6xD-ms-ohA"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Smh-N0-xxG" id="zCX-wG-fLF"/>
+                        <outlet property="lblStatus" destination="fEe-ZV-TGD" id="fno-VV-8D2"/>
+                        <outlet property="txtEmail" destination="hSU-kn-xE6" id="eCb-fc-ucX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Bs-wo-AcP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1824" y="80"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="vTf-IN-pDU">
+            <objects>
+                <tableViewController id="UMS-c8-xft" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VAs-vv-WS0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="OCZ-JS-k7T">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OCZ-JS-k7T" id="zRS-J5-csk">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="UMS-c8-xft" id="yyX-W0-rH6"/>
+                            <outlet property="delegate" destination="UMS-c8-xft" id="IxH-x9-drr"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem width="16" style="plain" systemItem="fixedSpace" id="bOC-Hi-iXN"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bCo-CP-26l"/>
+                        <barButtonItem title="Status" id="Nk0-4X-TSj"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="pdI-G7-T3S"/>
+                        <barButtonItem title="A" id="iZl-Z7-GKk"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="34f-bw-OZY"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p1F-J9-R3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1296" y="815"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="AeY-7r-LVN">
+            <objects>
+                <viewController title="Profile View Controller" id="MUk-gF-6JK" customClass="ProfileViewController" customModule="Office365Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WxJ-Tb-oja"/>
+                        <viewControllerLayoutGuide type="bottom" id="r98-Uh-i0U"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BKA-wu-VL6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.31372549020000001" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="A4F-ct-zKS">
+                        <barButtonItem key="rightBarButtonItem" title="Sign out" id="9vF-sw-7JF">
+                            <connections>
+                                <action selector="signout:" destination="MUk-gF-6JK" id="55I-H0-zWf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jm0-1z-wuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1824" y="1583"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="ZTj-41-naa">
+            <objects>
+                <viewController id="k21-je-FIW" customClass="HomeViewController" customModule="Office365Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z7t-cU-m9S"/>
+                        <viewControllerLayoutGuide type="bottom" id="YzH-gW-BSm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Hl-La-z7e">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.31372549020000001" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JUb-SU-oxo"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bHy-7A-36N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1292" y="-614"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="g0l-bB-rtM">
+            <objects>
+                <tabBarController storyboardIdentifier="mainTabBarController" id="e7s-Az-0eV" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Iuq-6d-h8H">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="vqO-fy-oVh" kind="relationship" relationship="viewControllers" id="i87-CZ-ySg"/>
+                        <segue destination="gPd-PN-TvT" kind="relationship" relationship="viewControllers" id="78b-x9-AbH"/>
+                        <segue destination="mF2-dP-mNk" kind="relationship" relationship="viewControllers" id="asv-b8-Oyd"/>
+                        <segue destination="Ny5-W4-6U9" kind="relationship" relationship="viewControllers" id="8Bb-de-9Qd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H21-Bi-h7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="310" y="100"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="uTB-gM-3aI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vqO-fy-oVh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="home-icon" id="is7-0o-ccQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8X4-ZY-xVF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="k21-je-FIW" kind="relationship" relationship="rootViewController" id="eld-tH-8Yc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rdN-aD-rbI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="764" y="-614"/>
+        </scene>
+        <!--Inbox-->
+        <scene sceneID="G9B-6U-RgP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gPd-PN-TvT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Inbox" image="email-icon" id="anw-6e-ZO2"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d6r-SP-I4D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QOB-lx-ACh" kind="relationship" relationship="rootViewController" id="WLt-MR-qs6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0nB-IZ-mwg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1296" y="80"/>
+        </scene>
+        <!--Me-->
+        <scene sceneID="eTe-Xa-Y8u">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mF2-dP-mNk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Me" image="profile-icon" id="nSa-r8-umm"/>
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="osb-8B-KYJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MUk-gF-6JK" kind="relationship" relationship="rootViewController" id="6JS-ov-es3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vHK-qs-R5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1262" y="1569"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="CO0-Ls-afA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ny5-W4-6U9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Messages" image="email-icon" id="BxY-ch-68E"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bTA-bR-V2X">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UMS-c8-xft" kind="relationship" relationship="rootViewController" id="YfG-1d-8ye"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ulh-7g-H0S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="698" y="513"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="email-icon" width="24" height="24"/>
+        <image name="home-icon" width="24" height="24"/>
+        <image name="profile-icon" width="24" height="24"/>
+    </resources>
 </document>
