@@ -15,6 +15,7 @@ class InboxViewController: UIViewController {
     @IBOutlet weak var lblStatus: UILabel!
     
     var baseController = Office365ClientFetcher()
+    let office365Manager = Office365Manager()
    
     
     override func viewDidLoad() {
@@ -33,46 +34,31 @@ class InboxViewController: UIViewController {
     @IBAction func sendEmailMessage(sender: AnyObject) {
         
         let message = buildMessage()
+        
+        // Show the activity indicator
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
+        
+        office365Manager.sendMailMessage(message) { (success: Bool, error: MSODataException?) in
             
-        // Get the MSOutlookClient. A call will be made to Azure AD and you will be prompted for credentials if you don't
-        // have an access or refresh token in your token cache.
+            var statusText: String
             
-        baseController.fetchOutlookClient {
-            (outlookClient) -> Void in
-                
-            dispatch_async(dispatch_get_main_queue()) {
-                // Show the activity indicator
-                self.activityIndicator.hidden = false
-                self.activityIndicator.startAnimating()
+            if (success) {
+                statusText = "Check your inbox, you have a new message. :)"
             }
-                
-            let userFetcher = outlookClient.getMe()
-            let userOperations = (userFetcher.operations as MSOutlookUserOperations)
-                
-            let task = userOperations.sendMailWithMessage(message, saveToSentItems: true) {
-                    (returnValue:Int32, error:MSODataException!) -> Void in
-                    
-                var statusText: String
-                    
-                if (error == nil) {
-                    statusText = "Check your inbox, you have a new message. :)"
-                }
-                else {
-                    statusText = "The email could not be sent. Check the log for errors."
-                    NSLog("%@",[error.localizedDescription])
-                }
-                    
-                // Update the UI.
-                    
-                dispatch_async(dispatch_get_main_queue()) {
+            else {
+                statusText = "The email could not be sent. Check the log for errors."
+                NSLog("%@",[error!.localizedDescription])
+            }
+            
+            // Update the UI.
+            dispatch_async(dispatch_get_main_queue()) {
                     self.lblStatus.text = statusText
                     self.activityIndicator .stopAnimating()
                     self.activityIndicator.hidden = true
-                }
             }
-                
-            task.resume()
-        } //baseController
+        }
+
     }
         
     // Compose the mail message
