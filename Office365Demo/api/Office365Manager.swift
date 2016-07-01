@@ -508,10 +508,11 @@ class Office365Manager {
         
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
             
-            let userFetcher = outlookClient.getMe()
-            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher.getMessages()
-            let messageFetcher: MSOutlookMessageFetcher = messageCollectionFetcher.getById(messageId)
-            let messageOperations = (messageFetcher.operations as MSOutlookMessageOperations)
+            //TO DO:
+//            let userFetcher = outlookClient.getMe()
+//            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher.getMessages()
+//            let messageFetcher: MSOutlookMessageFetcher = messageCollectionFetcher.getById(messageId)
+//            let messageOperations = (messageFetcher.operations as MSOutlookMessageOperations)
             
             
         }

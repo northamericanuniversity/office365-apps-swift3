@@ -20,49 +20,71 @@ class MessagesTableViewController: UITableViewController {
     var isLoading : Bool = false
     let office365Manager: Office365Manager = Office365Manager()
     
-    var currentPage : Int32 = 0
-    
+    var currentPage : Int32 = 0 //default page number is zero (0)
+    var actionSheetController : UIAlertController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
- 
-        
         refreshControl?.addTarget(self, action: #selector(MessagesTableViewController.updateRefreshControl), forControlEvents: UIControlEvents.ValueChanged)
         
+        setupActionSheet()
         setupUI()
         updateRefreshControl()
-        
-        //updateStatusWithPrimaryMessage("Connected Successfully", secondaryMessage: "User successfully authenticated with the server", activityInProgress: false)
-       
     }
     
+     /****************************** init action sheet ******************************/
+    func setupActionSheet(){
+       
+        actionSheetController = UIAlertController(title: nil, message: "Choose Action", preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            
+        }
+        actionSheetController.addAction(cancelAction)//add action to the alert controller
+        
+        //sign out
+        let signoutAction = UIAlertAction(title: "Sign out", style: .Default) { (action) in
+            
+            let signoutAlert = UIAlertController(title: "Sign out", message: "Do you want to sign out?", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            //delete refused, don't delete this post
+            signoutAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) in
+                //don't do anything here, the dialog simply closes itself
+            }))
+            
+            //sign out now
+            signoutAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
+                
+                // Clear the access and refresh tokens from the credential cache. You need to clear cookies
+                // since ADAL uses information stored in the cookies to get a new access token.
+                let authenticationManager:AuthenticationManager = AuthenticationManager.sharedInstance
+                authenticationManager.clearCredentials()
+                
+                //jump back to the login view
+                let loginView : LoginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("loginView") as! LoginViewController;
+                self.presentViewController(loginView, animated: true, completion: nil)
+                
+            }))
+            
+            self.presentViewController(signoutAlert, animated: true, completion: nil)
+            
+        }
+        actionSheetController.addAction(signoutAction)//add action to the alert controller
+       
+    }
+     /****************************** END: init action sheet *****************************/
+    
+    /**************************************** init UI  **********************************/
     func setupUI(){
+
+        self.navigationController?.toolbarHidden = false //show toolbar
         
-        //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
-        
-//        self.edgesForExtendedLayout = UIRectEdge.None
-//        self.extendedLayoutIncludesOpaqueBars = false
-//        self.automaticallyAdjustsScrollViewInsets = false
-        
-        
-        /************************* init comments table view ********************/
-        tableView.contentInset.bottom = UIApplication.sharedApplication().statusBarFrame.height + 60
-//        tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.estimatedRowHeight = 144
-        
-        let statusView: UIView = UIView(frame: CGRectMake(0, 0, 225, 32))
+        let statusView: UIView = UIView(frame: CGRectMake(0, 0, 225, 36))
         let primaryStatusLabel: UILabel = UILabel(frame: CGRectMake(0, 0, 225, 16))
         let secondaryStatusLabel: UILabel = UILabel(frame: CGRectMake(0, 18, 225, 12))
         
-        primaryStatusLabel.font = UIFont(name: "Halvetica", size: CGFloat(13.0))
-        secondaryStatusLabel.font = UIFont(name: "Halvetica", size: CGFloat(10.0))
+        primaryStatusLabel.font = UIFont.systemFontOfSize(13)
+        secondaryStatusLabel.font = UIFont.systemFontOfSize(10)
         
         primaryStatusLabel.textAlignment = NSTextAlignment.Center
         secondaryStatusLabel.textAlignment = NSTextAlignment.Center
@@ -87,20 +109,18 @@ class MessagesTableViewController: UITableViewController {
         refreshControl?.backgroundColor = UIColor().o365_PrimaryColor()
         refreshControl?.tintColor = UIColor.whiteColor()
     }
+    /************************************** END: init UI  ********************************/
 
     //update refresh control
     func updateRefreshControl(){
       
         if let lastUpdatedDate: NSDate = office365Manager.lastrefreshdate {
-            
             let lastUpdatedTitle = "Last updated on \(lastUpdatedDate.o365_string_from_date())"
             refreshControl?.attributedTitle = NSAttributedString(string:   lastUpdatedTitle)
         }
         
         currentPage = 0
-        
         performFetchMailMessages()
-        
         
     }
     
@@ -129,22 +149,38 @@ class MessagesTableViewController: UITableViewController {
     
     func performFetchMailMessages(){
         
+        //keep always last updated date as secondary message in status tool bar
+        var secondaryMessage = ""
         if let lastUpdatedDate: NSDate = office365Manager.lastrefreshdate {
-            let secondaryMessage = "Last updated on \(lastUpdatedDate.o365_string_from_date())"
-            self.updateStatusWithPrimaryMessage("fetching messages", secondaryMessage: secondaryMessage, activityInProgress: true)
+            secondaryMessage = "Last updated on \(lastUpdatedDate.o365_string_from_date())"
         }
- 
-//        office365Manager.fetchMailMessages { (messages: NSArray, error: MSODataException?) in
-//            dispatch_async(dispatch_get_main_queue()) {
-//                self.tableView.reloadData()
-//            }
-//        }
         
+        self.updateStatusWithPrimaryMessage("fetching messages", secondaryMessage: secondaryMessage, activityInProgress: true)
+ 
+        /*********************** Alternative way to get only 10 messags by default ****************
+        office365Manager.fetchMailMessages { (messages: NSArray, error: MSODataException?) in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.tableView.reloadData()
+            }
+        }
+        ******************* END: Alternative way to get only 10 messags by default ****************/
+        
+        
+        //get email messages by page number
         office365Manager.fetchMailMessagesForPageNumber(currentPage, pageSize: 10, orderBy: "DateTimeReceived desc") { (messages: NSArray, error: MSODataException?) in
             dispatch_async(dispatch_get_main_queue()) {
+                
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
                 self.isLoading = false
+                var secondaryMessage = ""
+                var primaryMessage = ""
+                
+                if let lastUpdatedDate: NSDate = self.office365Manager.lastrefreshdate {
+                    secondaryMessage = "Last updated on \(lastUpdatedDate.o365_string_from_date())"
+                }
+                primaryMessage = "fetched latest \(self.office365Manager.allConversations.count) messages"
+                self.updateStatusWithPrimaryMessage(primaryMessage, secondaryMessage: secondaryMessage, activityInProgress: false)
             }
         }
     }
@@ -182,12 +218,7 @@ class MessagesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("messagecell", forIndexPath: indexPath) as! MessagesTableViewCell
        
         let conversation : Conversation = office365Manager.allConversations[indexPath.section]
-        let outlookmessage = conversation.newestMessage()
-        
-//        print("Subject: \(outlookmessage.Subject)")
-//        print("conversid: \(outlookmessage.ConversationId)")
-//        print("Messages Count: \(conversation.messages.count)")
-//        print("")
+        let outlookmessage = conversation.newestMessage() //latest message
         
         cell.lblSubject.text = outlookmessage.Subject //subject
         cell.lblSender.text = outlookmessage.From.EmailAddress.Name //person's name
@@ -205,66 +236,11 @@ class MessagesTableViewController: UITableViewController {
        return cell
     }
     
-    override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
-//        if(velocity.y > 0){
-//            NSLog("dragging up")
-//        }else{
-//            NSLog("dragging down")
-//        }
+    /****************** just pump up the action sheet *******************/
+    @IBAction func showActionSheet(sender: UIBarButtonItem) {
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
-    
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        let height = scrollView.frame.size.height
-        let contentYoffset = scrollView.contentOffset.y
-        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        
-//        if(distanceFromBottom < height){
-//            print("load more")
-//        }
-        
-//        //if we reach the end of the table
-//        if((scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height){
-//            //print("reached at the end of the table")
-//        }
-    }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    /*************** END: just pump up the action sheet *****************/
 
     /*
     // MARK: - Navigation

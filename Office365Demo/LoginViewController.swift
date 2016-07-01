@@ -71,8 +71,11 @@ class LoginViewController: UIViewController {
                         let userEmail = userDefaults.stringForKey("LogInUser")!
                         print("user email: \(userEmail)")
                         
-                        let mainTabBar : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("mainTabBarController") as! UITabBarController;
-                        self.presentViewController(mainTabBar, animated: true, completion: nil)
+//                        let mainTabBar : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("mainTabBarController") as! UITabBarController;
+                        
+                        let navMessagesView : UINavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("navMessagesView") as! UINavigationController
+                        
+                        self.presentViewController(navMessagesView, animated: true, completion: nil)
                         
                     }
                 }

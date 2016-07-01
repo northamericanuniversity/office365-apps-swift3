@@ -23,12 +23,8 @@
 		59EBD3291D186743009E6C2F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 59EBD3281D186743009E6C2F /* Podfile */; };
 		59EBD32D1D186C56009E6C2F /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD32C1D186C56009E6C2F /* AuthenticationManager.swift */; };
 		59EBD32F1D1871D9009E6C2F /* O365ClientFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD32E1D1871D9009E6C2F /* O365ClientFetcher.swift */; };
-		59EBD3311D189C7C009E6C2F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD3301D189C7C009E6C2F /* HomeViewController.swift */; };
 		59EBD3331D189D56009E6C2F /* Office365LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD3321D189D56009E6C2F /* Office365LoginButton.swift */; };
-		59EBD3391D19AA43009E6C2F /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD3381D19AA43009E6C2F /* InboxViewController.swift */; };
 		59EBD33B1D19B585009E6C2F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD33A1D19B585009E6C2F /* LoginViewController.swift */; };
-		59EBD33D1D19BC91009E6C2F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EBD33C1D19BC91009E6C2F /* ProfileViewController.swift */; };
-		59EBD3401D19E1F3009E6C2F /* EmailBody.html in Resources */ = {isa = PBXBuildFile; fileRef = 59EBD33F1D19E1F3009E6C2F /* EmailBody.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +52,7 @@
 		595490A91D21C85000A74E3B /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = extension/NSDateExtension.swift; sourceTree = "<group>"; };
 		595490B01D23181E00A74E3B /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = model/Conversation.swift; sourceTree = "<group>"; };
 		595490B21D24404600A74E3B /* Office365Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Office365Manager.swift; path = api/Office365Manager.swift; sourceTree = "<group>"; };
+		595490B41D26CA8100A74E3B /* Office365Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Office365Demo.entitlements; sourceTree = "<group>"; };
 		59EBD2F51D186156009E6C2F /* Office365Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Office365Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59EBD2F81D186156009E6C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59EBD2FD1D186156009E6C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,12 +69,8 @@
 		59EBD32B1D186B13009E6C2F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		59EBD32C1D186C56009E6C2F /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		59EBD32E1D1871D9009E6C2F /* O365ClientFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = O365ClientFetcher.swift; sourceTree = "<group>"; };
-		59EBD3301D189C7C009E6C2F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		59EBD3321D189D56009E6C2F /* Office365LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Office365LoginButton.swift; path = button/Office365LoginButton.swift; sourceTree = "<group>"; };
-		59EBD3381D19AA43009E6C2F /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		59EBD33A1D19B585009E6C2F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		59EBD33C1D19BC91009E6C2F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		59EBD33F1D19E1F3009E6C2F /* EmailBody.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = EmailBody.html; path = util/EmailBody.html; sourceTree = "<group>"; };
 		DF47302380EC9B8D1050396D /* libPods-Office365Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Office365Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E00FCB21BB973EE1B0F200F3 /* Pods-Office365Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Office365Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Office365Demo/Pods-Office365Demo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,18 +152,15 @@
 		59EBD2F71D186156009E6C2F /* Office365Demo */ = {
 			isa = PBXGroup;
 			children = (
+				595490B41D26CA8100A74E3B /* Office365Demo.entitlements */,
 				595490AF1D2317F900A74E3B /* model */,
 				595490A61D219C6600A74E3B /* extension */,
 				5954909F1D21830200A74E3B /* cell */,
-				59EBD33E1D19E1B9009E6C2F /* util */,
 				59EBD3351D18A029009E6C2F /* api */,
 				59EBD3341D189D5E009E6C2F /* button */,
 				59EBD2F81D186156009E6C2F /* AppDelegate.swift */,
 				59EBD33A1D19B585009E6C2F /* LoginViewController.swift */,
-				59EBD3381D19AA43009E6C2F /* InboxViewController.swift */,
 				595490A21D2183A100A74E3B /* MessagesTableViewController.swift */,
-				59EBD33C1D19BC91009E6C2F /* ProfileViewController.swift */,
-				59EBD3301D189C7C009E6C2F /* HomeViewController.swift */,
 				59EBD2FC1D186156009E6C2F /* Main.storyboard */,
 				59EBD2FF1D186156009E6C2F /* Assets.xcassets */,
 				59EBD3011D186156009E6C2F /* LaunchScreen.storyboard */,
@@ -214,14 +204,6 @@
 				595490B21D24404600A74E3B /* Office365Manager.swift */,
 			);
 			name = api;
-			sourceTree = "<group>";
-		};
-		59EBD33E1D19E1B9009E6C2F /* util */ = {
-			isa = PBXGroup;
-			children = (
-				59EBD33F1D19E1F3009E6C2F /* EmailBody.html */,
-			);
-			name = util;
 			sourceTree = "<group>";
 		};
 		D815335B4A2515564F48E83F /* Pods */ = {
@@ -312,6 +294,12 @@
 				TargetAttributes = {
 					59EBD2F41D186156009E6C2F = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = RLAHF6FL89;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					59EBD3081D186156009E6C2F = {
 						CreatedOnToolsVersion = 7.3;
@@ -349,7 +337,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				59EBD3031D186156009E6C2F /* LaunchScreen.storyboard in Resources */,
-				59EBD3401D19E1F3009E6C2F /* EmailBody.html in Resources */,
 				59EBD3001D186156009E6C2F /* Assets.xcassets in Resources */,
 				59EBD3291D186743009E6C2F /* Podfile in Resources */,
 				59EBD2FE1D186156009E6C2F /* Main.storyboard in Resources */,
@@ -427,15 +414,12 @@
 			files = (
 				595490A51D21866900A74E3B /* MessagesTableViewCell.swift in Sources */,
 				595490A31D2183A100A74E3B /* MessagesTableViewController.swift in Sources */,
-				59EBD3391D19AA43009E6C2F /* InboxViewController.swift in Sources */,
 				595490B31D24404600A74E3B /* Office365Manager.swift in Sources */,
 				595490B11D23181E00A74E3B /* Conversation.swift in Sources */,
-				59EBD3311D189C7C009E6C2F /* HomeViewController.swift in Sources */,
 				59EBD32D1D186C56009E6C2F /* AuthenticationManager.swift in Sources */,
 				59EBD33B1D19B585009E6C2F /* LoginViewController.swift in Sources */,
 				59EBD2F91D186156009E6C2F /* AppDelegate.swift in Sources */,
 				59EBD3331D189D56009E6C2F /* Office365LoginButton.swift in Sources */,
-				59EBD33D1D19BC91009E6C2F /* ProfileViewController.swift in Sources */,
 				595490AA1D21C85000A74E3B /* NSDateExtension.swift in Sources */,
 				59EBD32F1D1871D9009E6C2F /* O365ClientFetcher.swift in Sources */,
 				595490A81D219C9200A74E3B /* UIColorExtension.swift in Sources */,
@@ -583,6 +567,7 @@
 			baseConfigurationReference = E00FCB21BB973EE1B0F200F3 /* Pods-Office365Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Office365Demo/Office365Demo.entitlements;
 				INFOPLIST_FILE = Office365Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -597,6 +582,7 @@
 			baseConfigurationReference = 39662F16A075918A8E57AC47 /* Pods-Office365Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Office365Demo/Office365Demo.entitlements;
 				INFOPLIST_FILE = Office365Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

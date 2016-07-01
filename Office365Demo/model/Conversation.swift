@@ -43,7 +43,7 @@ class Conversation: NSObject {
 //    }
     
     func compare(object: Conversation) -> NSComparisonResult {
-        return  object.newestMessage().DateTimeReceived.compare(self.newestMessage().DateTimeReceived)
+        return  object.newestMessage().DateTimeReceived.compare(self.newestMessage().DateTimeReceived) //descending order
     }
     
 }
