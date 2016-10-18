@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessagesViewController: UIViewController {
+class MessageDetailViewController: UIViewController {
 
     @IBOutlet weak var lblSubject: UILabel!
     @IBOutlet weak var lblFrom: UILabel!
@@ -18,10 +18,8 @@ class MessagesViewController: UIViewController {
     @IBOutlet weak var lblFiles: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var bodyWebMessage: UIWebView!
-    @IBOutlet weak var barItemReplyAll: UIBarButtonItem!
     @IBOutlet weak var barItemReply: UIBarButtonItem!
-    @IBOutlet weak var barItemForward: UIBarButtonItem!
-    
+    @IBOutlet weak var barItemReplyAll: UIBarButtonItem!
     
     let office365Manager: Office365Manager = Office365Manager()
     var message: MSOutlookMessage!
@@ -29,8 +27,6 @@ class MessagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
         if(message != nil){
             office365Manager.markAsRead(message.id, isRead: true, completionHandler: { (response: String, error: MSODataException?) in
                 //print("mark as read response: \(response)")

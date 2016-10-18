@@ -25,13 +25,16 @@ class MessagesTableViewController: UITableViewController {
     
     var selectedOutlookMessage: MSOutlookMessage?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         refreshControl?.addTarget(self, action: #selector(MessagesTableViewController.updateRefreshControl), for: UIControlEvents.valueChanged)
-        
         setupActionSheet()
         setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         updateRefreshControl()
     }
     
@@ -162,8 +165,7 @@ class MessagesTableViewController: UITableViewController {
             dispatch_async(dispatch_get_main_queue()) {
                 self.tableView.reloadData()
             }
-        }
-        ******************* END: Alternative way to get only 10 messags by default ****************/
+        }****************** END: Alternative way to get only 10 messags by default ****************/
         
         
         //get email messages by page number
@@ -260,8 +262,8 @@ class MessagesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if(segue.identifier == "showemail"){
-            let messagesViewController: MessagesViewController =  segue.destination as!  MessagesViewController
-            messagesViewController.message = selectedOutlookMessage
+            let messageDetailViewController: MessageDetailViewController =  segue.destination as!  MessageDetailViewController
+            messageDetailViewController.message = selectedOutlookMessage
         }
     }
     

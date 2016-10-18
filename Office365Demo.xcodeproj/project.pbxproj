@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		57ABE3FCF0CD7FBFCF2A5B25 /* libPods-Office365Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF47302380EC9B8D1050396D /* libPods-Office365Demo.a */; };
-		592B83C11DB5286F00FA7D5D /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B83C01DB5286F00FA7D5D /* MessagesViewController.swift */; };
+		592B83C11DB5286F00FA7D5D /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B83C01DB5286F00FA7D5D /* MessageDetailViewController.swift */; };
 		595490A31D2183A100A74E3B /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595490A21D2183A100A74E3B /* MessagesTableViewController.swift */; };
 		595490A51D21866900A74E3B /* MessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595490A41D21866900A74E3B /* MessagesTableViewCell.swift */; };
 		595490A81D219C9200A74E3B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595490A71D219C9200A74E3B /* UIColorExtension.swift */; };
@@ -47,7 +47,7 @@
 
 /* Begin PBXFileReference section */
 		39662F16A075918A8E57AC47 /* Pods-Office365Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Office365Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Office365Demo/Pods-Office365Demo.release.xcconfig"; sourceTree = "<group>"; };
-		592B83C01DB5286F00FA7D5D /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		592B83C01DB5286F00FA7D5D /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
 		595490A21D2183A100A74E3B /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		595490A41D21866900A74E3B /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesTableViewCell.swift; path = cell/MessagesTableViewCell.swift; sourceTree = "<group>"; };
 		595490A71D219C9200A74E3B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = extension/UIColorExtension.swift; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 				59EBD2F81D186156009E6C2F /* AppDelegate.swift */,
 				59EBD33A1D19B585009E6C2F /* LoginViewController.swift */,
 				595490A21D2183A100A74E3B /* MessagesTableViewController.swift */,
-				592B83C01DB5286F00FA7D5D /* MessagesViewController.swift */,
+				592B83C01DB5286F00FA7D5D /* MessageDetailViewController.swift */,
 				59EBD2FC1D186156009E6C2F /* Main.storyboard */,
 				59EBD2FF1D186156009E6C2F /* Assets.xcassets */,
 				59EBD3011D186156009E6C2F /* LaunchScreen.storyboard */,
@@ -424,7 +424,7 @@
 				595490B11D23181E00A74E3B /* Conversation.swift in Sources */,
 				59EBD32D1D186C56009E6C2F /* AuthenticationManager.swift in Sources */,
 				59EBD33B1D19B585009E6C2F /* LoginViewController.swift in Sources */,
-				592B83C11DB5286F00FA7D5D /* MessagesViewController.swift in Sources */,
+				592B83C11DB5286F00FA7D5D /* MessageDetailViewController.swift in Sources */,
 				59EBD2F91D186156009E6C2F /* AppDelegate.swift in Sources */,
 				59EBD3331D189D56009E6C2F /* Office365LoginButton.swift in Sources */,
 				595490AA1D21C85000A74E3B /* NSDateExtension.swift in Sources */,
@@ -523,7 +523,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -565,7 +565,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

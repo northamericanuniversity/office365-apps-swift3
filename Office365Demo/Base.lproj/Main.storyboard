@@ -58,7 +58,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OCZ-JS-k7T" id="zRS-J5-csk">
-                                    <frame key="frameInset" width="342" height="143"/>
+                                    <frame key="frameInset" width="342" height="143.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBa-Kt-qLo">
@@ -189,22 +189,23 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="4uU-Pk-ujx">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
                         <outlet property="activityBarButtonItem" destination="iZl-Z7-GKk" id="682-WY-Mr2"/>
                         <outlet property="statusBarButtonItem" destination="Nk0-4X-TSj" id="3RO-if-Se4"/>
-                        <segue destination="Vk1-1H-nye" kind="show" identifier="showemail" id="FTD-YX-GnZ"/>
+                        <segue destination="Vk1-1H-nye" kind="show" identifier="showemail" id="TaX-b7-52t"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p1F-J9-R3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1024" y="104"/>
         </scene>
-        <!--Messages View Controller-->
+        <!--Message Detail View Controller-->
         <scene sceneID="6UJ-g2-gys">
             <objects>
-                <viewController id="Vk1-1H-nye" customClass="MessagesViewController" customModule="Office365Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vk1-1H-nye" customClass="MessageDetailViewController" customModule="Office365Demo" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PWD-7K-NTV"/>
                         <viewControllerLayoutGuide type="bottom" id="k40-R0-3un"/>
@@ -373,23 +374,14 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Forward" id="AcH-Ks-khI">
-                            <color key="tintColor" red="0.0" green="0.3924765939" blue="0.61647812970000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
+                        <barButtonItem title="Reply All" id="aoh-Yd-JZv"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="eLh-Qc-Oft"/>
-                        <barButtonItem title="Reply All" id="Z9e-jh-UhT">
-                            <color key="tintColor" red="0.0" green="0.3924765939" blue="0.61647812970000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="eWJ-WE-VhF"/>
-                        <barButtonItem title="Reply" id="KbA-Kp-DPx">
-                            <color key="tintColor" red="0.0" green="0.3924765939" blue="0.61647812970000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
+                        <barButtonItem title="Reply" id="MRe-E0-U92"/>
                     </toolbarItems>
                     <connections>
                         <outlet property="activityIndicator" destination="hco-LX-o4J" id="b3n-LL-ykp"/>
-                        <outlet property="barItemForward" destination="AcH-Ks-khI" id="Tfe-mx-TSI"/>
-                        <outlet property="barItemReply" destination="Z9e-jh-UhT" id="0FJ-rl-svw"/>
-                        <outlet property="barItemReplyAll" destination="Z9e-jh-UhT" id="fUL-ar-ezp"/>
+                        <outlet property="barItemReply" destination="MRe-E0-U92" id="FWH-0t-rwG"/>
+                        <outlet property="barItemReplyAll" destination="aoh-Yd-JZv" id="vZy-BZ-sqz"/>
                         <outlet property="bodyWebMessage" destination="Tyu-xq-yfY" id="TcJ-Vv-yL8"/>
                         <outlet property="lblCc" destination="VRn-cE-Ajy" id="eo1-p2-b97"/>
                         <outlet property="lblFiles" destination="Kg4-Yz-Krn" id="CGB-gv-ncK"/>
@@ -401,7 +393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s60-mj-tN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1776.8" y="103.89805097451276"/>
+            <point key="canvasLocation" x="1794" y="104"/>
         </scene>
         <!--Messages-->
         <scene sceneID="CO0-Ls-afA">
