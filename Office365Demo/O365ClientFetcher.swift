@@ -72,7 +72,7 @@ class Office365ClientFetcher {
     // from the cookie cache and use that to get a new access and refresh token.
     
     
-    func fetchOutlookClient(completionHandler:((outlookClient: MSOutlookClient) -> Void)) {
+    func fetchOutlookClient(_ completionHandler:@escaping ((_ outlookClient: MSOutlookClient) -> Void)) {
         // Get an instance of the authentication controller.
         let authenticationManager = AuthenticationManager.sharedInstance
         
@@ -83,43 +83,43 @@ class Office365ClientFetcher {
         // manager will use the access or refresh token in the cache to authenticate client requests.
         // This will result in a call to the service if you need to get an access token.
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let serviceEndpoints = userDefaults.dictionaryForKey("O365ServiceEndpoints") {
-        
+        let userDefaults = UserDefaults.standard
+        if let serviceEndpoints = userDefaults.dictionary(forKey: "O365ServiceEndpoints") {
+            
             //serviceEndpoints["MailResourceID"] ==> "https://outlook.office365.com/"
-            if let resourceID: AnyObject = serviceEndpoints["MailResourceID"] {
+            if let resourceID: AnyObject = serviceEndpoints["MailResourceID"] as AnyObject? {
                 
-                authenticationManager.acquireAuthTokenWithResourceId(resourceID as! String) {
+                authenticationManager.acquireAuthTokenWithResourceId(resourceId: resourceID as! String) {
                     (authenticated:Bool) -> Void in
                     
                     if (authenticated) {
                         
                         // serviceEndpoints["Mail"] => "https://outlook.office365.com/api/v1.0"
-                        if let serviceEndpointUrl: AnyObject = serviceEndpoints["Mail"] {
+                        if let serviceEndpointUrl: AnyObject = serviceEndpoints["Mail"] as AnyObject? {
                             // Gets the MSOutlookClient with the URL for the Mail service.
                             let outlookClient = MSOutlookClient(url: serviceEndpointUrl as! String, dependencyResolver: authenticationManager.dependencyResolver)
-                            completionHandler(outlookClient: outlookClient)
+                            completionHandler(outlookClient!)
                         }
                         
                     }
                     else {
                         // Display an alert in case of an error
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             NSLog("Error in the authentication")
-                            let alert = UIAlertController(title: "Error", message:"Authentication failed. Check the log for errors.", preferredStyle: .Alert)
-                            let action = UIAlertAction(title: "OK", style: .Default) { _ in
+                            let alert = UIAlertController(title: "Error", message:"Authentication failed. Check the log for errors.", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "OK", style: .default) { _ in
                                 // Put here any code that you would like to execute when
                                 // the user taps that OK button (may be empty in your case if that's just
                                 // an informative alert)
                             }
                             alert.addAction(action)
-                            let rootVC = UIApplication.sharedApplication().keyWindow?.rootViewController
-                            rootVC?.presentViewController(alert, animated: true){}
+                            let rootVC = UIApplication.shared.keyWindow?.rootViewController
+                            rootVC?.present(alert, animated: true){}
                             
                         }
                     }
                 }
-
+                
             }
             
         }else{
@@ -130,40 +130,40 @@ class Office365ClientFetcher {
     }
     
     // Gets the SharePointClient which is used to access sharepoint services such as Files
-    func fetchSharePointClient(completionHandler:((sharePointClient: MSSharePointClient) -> Void)){
+    func fetchSharePointClient(_ completionHandler:@escaping ((_ sharePointClient: MSSharePointClient) -> Void)){
         
         // Get an instance of the authentication controller.
         let authenticationManager:AuthenticationManager = AuthenticationManager.sharedInstance
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let serviceEndpoints = userDefaults.dictionaryForKey("O365ServiceEndpoints") {
+        let userDefaults = UserDefaults.standard
+        if let serviceEndpoints = userDefaults.dictionary(forKey: "O365ServiceEndpoints") {
             
             //serviceEndpoints["MyFilesResourceID"] ==> "https://nau3203-my.sharepoint.com/"
-            if let resourceID: AnyObject = serviceEndpoints["MyFilesResourceID"] {
+            if let resourceID: AnyObject = serviceEndpoints["MyFilesResourceID"] as AnyObject? {
                 
-                authenticationManager.acquireAuthTokenWithResourceId(resourceID as! String) {
+                authenticationManager.acquireAuthTokenWithResourceId(resourceId: resourceID as! String) {
                     (authenticated:Bool) -> Void in
                     
                     if (authenticated) {
                         
-                        if let serviceEndpointUrl: AnyObject = serviceEndpoints["MyFiles"] {
+                        if let serviceEndpointUrl: AnyObject = serviceEndpoints["MyFiles"] as AnyObject? {
                             // Gets the MSSharePointClient with the URL for the MyFiles service.
                             let sharePointClient = MSSharePointClient(url: serviceEndpointUrl as! String, dependencyResolver: authenticationManager.dependencyResolver)
-                            completionHandler(sharePointClient: sharePointClient)
+                            completionHandler(sharePointClient!)
                         }
                     }else{
                         // Display an alert in case of an error
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             NSLog("Error in the authentication")
-                            let alert = UIAlertController(title: "Error", message:"Authentication failed. Check the log for errors.", preferredStyle: .Alert)
-                            let action = UIAlertAction(title: "OK", style: .Default) { _ in
+                            let alert = UIAlertController(title: "Error", message:"Authentication failed. Check the log for errors.", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "OK", style: .default) { _ in
                                 // Put here any code that you would like to execute when
                                 // the user taps that OK button (may be empty in your case if that's just
                                 // an informative alert)
                             }
                             alert.addAction(action)
-                            let rootVC = UIApplication.sharedApplication().keyWindow?.rootViewController
-                            rootVC?.presentViewController(alert, animated: true){}
+                            let rootVC = UIApplication.shared.keyWindow?.rootViewController
+                            rootVC?.present(alert, animated: true){}
                             
                         }
                     }
@@ -178,7 +178,7 @@ class Office365ClientFetcher {
     
     
     // Gets the DiscoveryClient which is used to discover the service endpoints
-    func fetchDiscoveryClient(completionHandler:((discoveryClient: MSDiscoveryClient) -> Void)) {
+    func fetchDiscoveryClient(_ completionHandler:@escaping ((_ discoveryClient: MSDiscoveryClient) -> Void)) {
         
         // Get an instance of the authentication controller.
         let authenticationManager:AuthenticationManager = AuthenticationManager.sharedInstance
@@ -190,27 +190,27 @@ class Office365ClientFetcher {
         // manager will use the access or refresh token in the cache to authenticate client requests.
         // This will result in a call to the service if you need to get an access token.
         
-        authenticationManager.acquireAuthTokenWithResourceId("https://api.office.com/discovery/") {
+        authenticationManager.acquireAuthTokenWithResourceId(resourceId: "https://api.office.com/discovery/") {
             (authenticated:Bool) -> Void in
             
             if (authenticated) {
                 // Gets the MSDiscoveryClient with the URL for the Discovery service.
                 let discoveryClient = MSDiscoveryClient(url: "https://api.office.com/discovery/v2.0/me/", dependencyResolver: authenticationManager.dependencyResolver)
-                completionHandler(discoveryClient: discoveryClient)
+                completionHandler(discoveryClient!)
             }
             else {
                 // Display an alert in case of an error
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     NSLog("Error in the authentication")
-                    let alert = UIAlertController(title: "Error", message:"Authentication failed. Check the log for errors.", preferredStyle: .Alert)
-                    let action = UIAlertAction(title: "OK", style: .Default) { _ in
+                    let alert = UIAlertController(title: "Error", message:"Authentication failed. Check the log for errors.", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: .default) { _ in
                         // Put here any code that you would like to execute when
                         // the user taps that OK button (may be empty in your case if that's just
                         // an informative alert)
                     }
                     alert.addAction(action)
-                    let rootVC = UIApplication.sharedApplication().keyWindow?.rootViewController
-                    rootVC?.presentViewController(alert, animated: true){}
+                    let rootVC = UIApplication.shared.keyWindow?.rootViewController
+                    rootVC?.present(alert, animated: true){}
                     
                 }
             }

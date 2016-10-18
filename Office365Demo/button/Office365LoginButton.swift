@@ -20,13 +20,13 @@ class Office365LoginButton: UIButton {
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         layer.masksToBounds = true
         layer.cornerRadius = 8.0
         layer.borderWidth = 1
-        layer.borderColor = UIColor(white: 1.0, alpha: 0.7).CGColor
-        layer.shadowColor = UIColor.brownColor().CGColor
+        layer.borderColor = UIColor(white: 1.0, alpha: 0.7).cgColor
+        layer.shadowColor = UIColor.brown.cgColor
         
     }
     

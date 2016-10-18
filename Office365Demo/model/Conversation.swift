@@ -20,8 +20,8 @@ class Conversation: NSObject {
         self.messages  = messages
         
         for message in messages{
-            if(!message.IsRead){
-                unreadMessages.addObject(message)
+            if(!(message as AnyObject).isRead){
+                unreadMessages.add(message)
             }
         }
     }
@@ -42,8 +42,8 @@ class Conversation: NSObject {
 //        return self.oldestMessage() != nil ? self.oldestMessage() : self.newestMessage()
 //    }
     
-    func compare(object: Conversation) -> NSComparisonResult {
-        return  object.newestMessage().DateTimeReceived.compare(self.newestMessage().DateTimeReceived) //descending order
+    func compare(_ object: Conversation) -> ComparisonResult {
+        return  object.newestMessage().dateTimeReceived.compare(self.newestMessage().dateTimeReceived) //descending order
     }
     
 }

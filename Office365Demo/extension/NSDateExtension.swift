@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension NSDate{
+extension Date{
     
  
     func o365_string_from_date() -> String{
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM d, YYYY 'at' HH:mm a"
-        return dateFormatter.stringFromDate(self)
+        return dateFormatter.string(from: self)
     }
 }

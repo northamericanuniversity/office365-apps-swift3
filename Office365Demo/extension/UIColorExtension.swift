@@ -18,7 +18,8 @@ extension UIColor {
 
     func o365_PrimaryColor() -> UIColor {
         
-        return UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0)
+        //return UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0)
+        return UIColor(red: 0x2f/255, green: 0x51/255, blue: 0x89/255, alpha: 1.0)
     }
     
     func o365_PrimaryHighlightColor() -> UIColor {

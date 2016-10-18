@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     }
     
     
-    @IBAction func connectToOffice365(sender: AnyObject) {
+    @IBAction func connectToOffice365(_ sender: AnyObject) {
         
         // Connect to the service by discovering the service endpoints and authorizing
         // the application to access the user's email. This will store the user's
@@ -43,7 +43,9 @@ class LoginViewController: UIViewController {
             
             // Call the Discovery Service and get back an array of service endpoint information
             
-            let servicesTask = servicesInfoFetcher.readWithCallback{(serviceEndPointObjects:[AnyObject]!, error:MSODataException!) -> Void in
+            let servicesTask = servicesInfoFetcher?.read{(serviceEndPointObjects:[Any]?, error:MSODataException?) -> Void in
+                
+                
                 let serviceEndpoints = serviceEndPointObjects as! [MSDiscoveryServiceInfo]
                 
                 if (serviceEndpoints.count > 0) {
@@ -51,8 +53,7 @@ class LoginViewController: UIViewController {
                     // need to call the Discovery Service again until either this cache is removed, or you
                     // get an error that indicates that the endpoint is no longer valid.
                     
-                    var serviceEndpointLookup = [NSObject: AnyObject]()
-                    
+                    var serviceEndpointLookup = [AnyHashable: Any]()
                     for serviceEndpoint in serviceEndpoints {
                         serviceEndpointLookup[serviceEndpoint.capability] = serviceEndpoint.serviceEndpointUri
                          serviceEndpointLookup[serviceEndpoint.capability+"ResourceID"] = serviceEndpoint.serviceResourceId
@@ -62,42 +63,41 @@ class LoginViewController: UIViewController {
                     }
                     
                     // Keep track of the service endpoints in the user defaults
-                    let userDefaults = NSUserDefaults.standardUserDefaults()
-                    
-                    userDefaults.setObject(serviceEndpointLookup, forKey: "O365ServiceEndpoints")
+                    let userDefaults = UserDefaults.standard
+                    userDefaults.set(serviceEndpointLookup, forKey: "O365ServiceEndpoints")
                     userDefaults.synchronize()
                     
-                    dispatch_async(dispatch_get_main_queue()) {
-                        let userEmail = userDefaults.stringForKey("LogInUser")!
+                    DispatchQueue.main.async {
+                        let userEmail = userDefaults.string(forKey: "demo_email")!
                         print("user email: \(userEmail)")
                         
 //                        let mainTabBar : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("mainTabBarController") as! UITabBarController;
                         
-                        let navMessagesView : UINavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("navMessagesView") as! UINavigationController
+                        let navMessagesView : UINavigationController = self.storyboard?.instantiateViewController(withIdentifier: "navMessagesView") as! UINavigationController
                         
-                        self.presentViewController(navMessagesView, animated: true, completion: nil)
+                        self.present(navMessagesView, animated: true, completion: nil)
                         
                     }
                 }
                     
                 else {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        NSLog("Error in the authentication: %@", error)
-                        let alert = UIAlertController(title: "Error", message:"Authentication failed. This may be because the Internet connection is offline  or perhaps the credentials are incorrect. Check the log for errors and try again.", preferredStyle: .Alert)
-                        let action = UIAlertAction(title: "OK", style: .Default) { _ in
+                    DispatchQueue.main.async {
+                        //log("Error in the authentication: \(error)")
+                        let alert = UIAlertController(title: "Error", message:"Authentication failed. This may be because the Internet connection is offline  or perhaps the credentials are incorrect. Check the log for errors and try again.", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "OK", style: .default) { _ in
                             // Put here any code that you would like to execute when
                             // the user taps that OK button (may be empty in your case if that's just
                             // an informative alert)
                         }
                         alert.addAction(action)
                         
-                        self.presentViewController(alert, animated: true){}
+                        self.present(alert, animated: true){}
                         
                     }
                 }
             }
             
-            servicesTask.resume()
+            servicesTask?.resume()
         }
 
         
