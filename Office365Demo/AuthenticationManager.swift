@@ -37,7 +37,7 @@ let REDIRECT_URL_STRING = ""
 let CLIENT_ID           = ""
 let AUTHORITY           = "https://login.microsoftonline.com/common"
 
-class AuthenticationManager {
+class AuthenticationManager{
     var redirectURL: URL
     var authority: String = ""
     var clientId: String = ""
