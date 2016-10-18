@@ -29,7 +29,7 @@ class Office365Manager {
         for (index,message) in messages.enumerated() {
             var messagQue = messagesByConversationID[message.conversationId!]
             if(messagQue == nil){
-                //print("messagQue: index==> \(index)  message.conversationId: \(message.conversationId!)")
+                print("messagQue: index==> \(index)  message.conversationId: \(message.conversationId!)")
                 messagQue = NSMutableArray()
                 messagesByConversationID[message.conversationId!] = messagQue
             }
@@ -40,7 +40,7 @@ class Office365Manager {
         let conversations: NSMutableArray = NSMutableArray()
         
         for (index,value)  in messagesByConversationID.allValues.enumerated()  {
-            //print("messagesByConversationID index==> \(index)")
+            print("messagesByConversationID index==> \(index)")
             let messages: NSMutableArray = value as! NSMutableArray
             let conversation : Conversation = Conversation(messages: messages)
             conversations.add(conversation)

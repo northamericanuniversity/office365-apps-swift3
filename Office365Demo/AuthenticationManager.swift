@@ -87,7 +87,9 @@ class AuthenticationManager {
                 
                 
                 let email: String = (result?.tokenCacheStoreItem.userInformation.userId)!
-                let fullname = "\((result?.tokenCacheStoreItem.userInformation.givenName)!) \((result?.tokenCacheStoreItem.userInformation.familyName)!)"
+                
+                //fullname is not used right now
+                //let fullname = "\((result?.tokenCacheStoreItem.userInformation.givenName)!) \((result?.tokenCacheStoreItem.userInformation.familyName)!)"
                 
                 //print("email: \(email)  fullname: \(fullname)")
                 
