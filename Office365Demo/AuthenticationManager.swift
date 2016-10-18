@@ -33,8 +33,8 @@ import Foundation
 
 // You will set your application's clientId and redirect URI. You get
 // these when you register your application in Azure AD.
-let REDIRECT_URL_STRING = "http://oyvent.com"
-let CLIENT_ID           = "f9587fd3-d19c-4e6e-9b4e-b7e374032d70"
+let REDIRECT_URL_STRING = ""
+let CLIENT_ID           = ""
 let AUTHORITY           = "https://login.microsoftonline.com/common"
 
 class AuthenticationManager {
