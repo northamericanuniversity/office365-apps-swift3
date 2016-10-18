@@ -69,8 +69,8 @@
 		59EBD31A1D186156009E6C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59EBD3281D186743009E6C2F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		59EBD32B1D186B13009E6C2F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		59EBD32C1D186C56009E6C2F /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		59EBD32E1D1871D9009E6C2F /* O365ClientFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = O365ClientFetcher.swift; sourceTree = "<group>"; };
+		59EBD32C1D186C56009E6C2F /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationManager.swift; path = api/AuthenticationManager.swift; sourceTree = "<group>"; };
+		59EBD32E1D1871D9009E6C2F /* O365ClientFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = O365ClientFetcher.swift; path = api/O365ClientFetcher.swift; sourceTree = "<group>"; };
 		59EBD3321D189D56009E6C2F /* Office365LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Office365LoginButton.swift; path = button/Office365LoginButton.swift; sourceTree = "<group>"; };
 		59EBD33A1D19B585009E6C2F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DF47302380EC9B8D1050396D /* libPods-Office365Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Office365Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
