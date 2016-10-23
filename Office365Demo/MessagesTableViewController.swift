@@ -24,6 +24,7 @@ class MessagesTableViewController: UITableViewController {
     var actionSheetController : UIAlertController!
     
     var selectedOutlookMessage: MSOutlookMessage?
+    var selectedConversation: Conversation?
     
     
     override func viewDidLoad() {
@@ -109,8 +110,6 @@ class MessagesTableViewController: UITableViewController {
         self.activityBarButtonItem.customView = activityIndicator
         self.activityIndicator = activityIndicator
         
-        refreshControl?.backgroundColor = UIColor().o365_PrimaryColor()
-        refreshControl?.tintColor = UIColor.white
     }
     /************************************** END: init UI  ********************************/
 
@@ -169,25 +168,31 @@ class MessagesTableViewController: UITableViewController {
         
         
         //get email messages by page number
-        office365Manager.fetchMailMessagesForPageNumber(currentPage, pageSize: 10, orderBy: "DateTimeReceived desc") { (messages: [Any]?, error: MSODataException?) in
-            
-            DispatchQueue.main.async {
-                
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
-                self.isLoading = false
-                var secondaryMessage = ""
-                var primaryMessage = ""
-                
-                if let lastUpdatedDate: Date = self.office365Manager.lastrefreshdate {
-                    secondaryMessage = "Last updated on \(lastUpdatedDate.o365_string_from_date())"
-                }
-                primaryMessage = "fetched latest \(self.office365Manager.allConversations.count) messages"
-                self.updateStatusWithPrimaryMessage(primaryMessage, secondaryMessage: secondaryMessage, activityInProgress: false)
-            }
-        }
+        office365Manager.fetchMailMessagesForPageNumber(currentPage, pageSize: 10, orderBy: "DateTimeReceived desc", folder: "Inbox") { (messages: [Any]?, error: MSODataException?) in
         
-    }
+            
+            self.office365Manager.fetchMailMessagesForPageNumber(self.currentPage, pageSize: 10, orderBy: "DateTimeReceived desc", folder: "SentItems") { (messages: [Any]?, error: MSODataException?) in
+            
+                 
+                
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.refreshControl?.endRefreshing()
+                        self.isLoading = false
+                        var secondaryMessage = ""
+                        var primaryMessage = ""
+                
+                        if let lastUpdatedDate: Date = self.office365Manager.lastrefreshdate {
+                            secondaryMessage = "Last updated on \(lastUpdatedDate.o365_string_from_date())"
+                        }
+                        primaryMessage = "fetched latest \(self.office365Manager.allConversations.count) messages"
+                        self.updateStatusWithPrimaryMessage(primaryMessage, secondaryMessage: secondaryMessage, activityInProgress: false)
+                    }//DispatchQueue
+                
+                }//SentItems
+        }//Inbox
+        
+    }//performFetchMailMessages
     
 
     // MARK: - Table view data source
@@ -210,7 +215,12 @@ class MessagesTableViewController: UITableViewController {
         let conversation : Conversation = office365Manager.allConversations[(indexPath as NSIndexPath).section]
         let outlookmessage = conversation.newestMessage() //latest message
         selectedOutlookMessage = outlookmessage
-        self.performSegue(withIdentifier: "showemail", sender: nil)
+        if(selectedOutlookMessage == nil){
+            print("selectedOutlookMessage here is nil")
+        }
+        
+        selectedConversation = conversation
+        self.performSegue(withIdentifier: "showdetails", sender: nil)
         
     }
     
@@ -231,7 +241,9 @@ class MessagesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "messagecell", for: indexPath) as! MessagesTableViewCell
        
         let conversation : Conversation = office365Manager.allConversations[(indexPath as NSIndexPath).section]
+        conversation.sortMessages()
         let outlookmessage = conversation.newestMessage() //latest message
+        
         
         cell.lblSubject.text = outlookmessage.subject //subject
         cell.lblSender.text = outlookmessage.from.emailAddress.name //person's name
@@ -256,14 +268,22 @@ class MessagesTableViewController: UITableViewController {
     /*************** END: just pump up the action sheet *****************/
 
     
+    
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
-        if(segue.identifier == "showemail"){
-            let messageDetailViewController: MessageDetailViewController =  segue.destination as!  MessageDetailViewController
-            messageDetailViewController.message = selectedOutlookMessage
+        if(segue.identifier == "showdetails"){
+//            let messageDetailViewController: MessageDetailViewController =  segue.destination as!  MessageDetailViewController
+//            messageDetailViewController.message = selectedOutlookMessage
+//            messageDetailViewController.conversation = selectedConversation
+            
+            let messageDetailTableViewController: MessageDetailTableViewController =  segue.destination as!  MessageDetailTableViewController
+            messageDetailTableViewController.conversation = selectedConversation
+            messageDetailTableViewController.message = selectedOutlookMessage
         }
     }
     

@@ -95,7 +95,7 @@ class AuthenticationManager{
                 
                 let userDefaults = UserDefaults.standard
                 userDefaults.set(email, forKey: "demo_email")
-                //userDefaults.set(fullname, forKey: "oyapp_fullname")
+                //userDefaults.set(fullname, forKey: "demo_fullname")
                 userDefaults.synchronize()
                 
                 self.dependencyResolver = ADALDependencyResolver(context: authContext, resourceId: resourceId, clientId: self.clientId , redirectUri: self.redirectURL)

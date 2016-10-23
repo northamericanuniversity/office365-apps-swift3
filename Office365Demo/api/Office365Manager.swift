@@ -21,15 +21,18 @@ class Office365Manager {
         clientFetcher = Office365ClientFetcher()
     }
     
+    let messagesByConversationID : NSMutableDictionary = [:]
+    let conversations: NSMutableArray = NSMutableArray()
+    
     func getConversationsFromMessages(_ messages: [MSOutlookMessage]) -> [Conversation] {
         
-        let messagesByConversationID : NSMutableDictionary = [:]
+        //let messagesByConversationID : NSMutableDictionary = [:]
         //let filteredMessages: NSArray = messages.filteredArrayUsingPredicate(NSPredicate(format: "isHidden == false"))
         
         for (index,message) in messages.enumerated() {
             var messagQue = messagesByConversationID[message.conversationId!]
             if(messagQue == nil){
-                print("messagQue: index==> \(index)  message.conversationId: \(message.conversationId!)")
+                //print("messagQue: index==> \(index)  message.conversationId: \(message.conversationId!)")
                 messagQue = NSMutableArray()
                 messagesByConversationID[message.conversationId!] = messagQue
             }
@@ -37,10 +40,10 @@ class Office365Manager {
         }
         
         
-        let conversations: NSMutableArray = NSMutableArray()
+        //let conversations: NSMutableArray = NSMutableArray()
         
         for (index,value)  in messagesByConversationID.allValues.enumerated()  {
-            print("messagesByConversationID index==> \(index)")
+            //print("messagesByConversationID index==> \(index)")
             let messages: NSMutableArray = value as! NSMutableArray
             let conversation : Conversation = Conversation(messages: messages)
             conversations.add(conversation)
@@ -178,12 +181,16 @@ class Office365Manager {
             // This results in a call to the service
             let userFetcher = outlookClient.getMe()
             let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getMessages()
-            messageCollectionFetcher.top(100)
+            messageCollectionFetcher.top(1000)
             messageCollectionFetcher.order(by: "DateTimeReceived desc")
+            
+            
             
             let task = messageCollectionFetcher.read{(messages:[Any]?, error:MSODataException?) -> Void in
                 self.lastrefreshdate = Date()
                 self.allMessages = messages as! [MSOutlookMessage]
+                
+                
                 self.allConversations = self.getConversationsFromMessages(self.allMessages)
                 //                print(self.allMessages)
                 //                print(self.allConversations)
@@ -196,13 +203,13 @@ class Office365Manager {
     }
     
     //fetch email messages based on pagenumber
-    func fetchMailMessagesForPageNumber(_ pageNumber: Int32, pageSize: Int32, orderBy: String, completionHandler:@escaping (([Any]?, MSODataException?) -> Void)) {
+    func fetchMailMessagesForPageNumber(_ pageNumber: Int32, pageSize: Int32, orderBy: String, folder: String, completionHandler:@escaping (([Any]?, MSODataException?) -> Void)) {
         
         // Get the MSOutlookClient. This object contains access tokens and methods to call the service
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
             
             let userFetcher = outlookClient.getMe()
-            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getMessages()
+            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getFolders().getById(folder).getMessages()
             messageCollectionFetcher.order(by: orderBy)
             messageCollectionFetcher.top(pageSize)
             messageCollectionFetcher.skip(pageNumber * pageSize)
@@ -211,14 +218,20 @@ class Office365Manager {
             let task = messageCollectionFetcher.read{(messages:[Any]?, error:MSODataException?) -> Void in
                 self.lastrefreshdate = Date()
                 
-                //if more pages are called, then append them
-                if(pageNumber > 0){
-                    
+                
+                   
                     //append additional messages
                     let additionalMessages: [MSOutlookMessage] = messages as! [MSOutlookMessage]
                     for additionalMessage in additionalMessages {
                         self.allMessages.append(additionalMessage)
                     }
+                    
+                    
+                    
+                    for (index,message) in self.allMessages.enumerated() {
+                        //print("index: \(index) subject: \(message.subject!) conversationId: \(message.conversationId!) from: \(message.from.emailAddress.name!)")
+                    }
+                    
                     
                     //append additional conversations
                     let additionalConversations = self.getConversationsFromMessages(additionalMessages)
@@ -226,21 +239,19 @@ class Office365Manager {
                         self.allConversations.append(additionalConversation)
                     }
                     
-                }else{//otherwise initialize the first page (pageNumber=0)
-                    self.allMessages = messages as! [MSOutlookMessage]
-                    self.allConversations = self.getConversationsFromMessages(self.allMessages)
-                }
                 
                 completionHandler(messages, error)
             }
             
             task?.resume()
+            
         }
         
     }
     
     //Sends a new email message to the user
     func sendMailMessage(_ message: MSOutlookMessage, completionHandler:@escaping ((Bool, MSODataException?) -> Void)) {
+        
         
         // Get the MSOutlookClient. This object contains access tokens and methods to call the service
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
@@ -251,6 +262,8 @@ class Office365Manager {
             let task = userOperations.sendMail(with: message, saveToSentItems: true) {
                 (returnValue: Int32, error: MSODataException?) -> Void in
                 
+                print("sendMessage error: \(error!)")
+                
                 let success: Bool = (returnValue == 0)
                 completionHandler(success, error)
             }
@@ -258,6 +271,7 @@ class Office365Manager {
             task?.resume()
         }
     }
+    
     
     //Creates a new email message in the user's Drafts folder
     //Does not send the email
@@ -359,7 +373,7 @@ class Office365Manager {
     }
     
     //Replies to a single recipient in a mail message
-    func replyToMailMessage(_ message: MSOutlookMessage, completionHandler:@escaping ((Int32, MSODataException?) -> Void)) {
+    func replyToMailMessage(_ message: MSOutlookMessage, body: String!, completionHandler:@escaping ((Int32, MSODataException?) -> Void)) {
         
         // Get the MSOutlookClient. This object contains access tokens and methods to call the service
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
@@ -369,9 +383,26 @@ class Office365Manager {
             let messageFetcher: MSOutlookMessageFetcher = messageCollectionFetcher.getById(message.id)
             let messageOperations = (messageFetcher.operations as MSOutlookMessageOperations)
             
-            //TO DO: a reply all (multiple recipients) you can replace replyWithComment to replyAllWithComment
-            let task = messageOperations.reply(withComment: "Testing reply snippet"){ (returnValue:Int32, error:MSODataException?) -> Void in
-                
+            let task = messageOperations.reply(withComment: body){ (returnValue:Int32, error:MSODataException?) -> Void in
+                completionHandler(returnValue, error)
+            }
+            
+            task?.resume()
+        }
+    }
+    
+    //Replies to all recipients in a mail message
+    func replyAllToMailMessage(_ message: MSOutlookMessage, body: String!, completionHandler:@escaping ((Int32, MSODataException?) -> Void)) {
+        
+        // Get the MSOutlookClient. This object contains access tokens and methods to call the service
+        clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
+            
+            let userFetcher = outlookClient.getMe()
+            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getMessages()
+            let messageFetcher: MSOutlookMessageFetcher = messageCollectionFetcher.getById(message.id)
+            let messageOperations = (messageFetcher.operations as MSOutlookMessageOperations)
+            
+            let task = messageOperations.replyAll(withComment: body){ (returnValue:Int32, error:MSODataException?) -> Void in
                 completionHandler(returnValue, error)
             }
             
@@ -381,7 +412,7 @@ class Office365Manager {
     
     
     //Create a draft reply email message in inbox
-    func createDraftReplyMessage(_ message: MSOutlookMessage, completionHandler:@escaping ((MSOutlookMessage, MSODataException?) -> Void )){
+    func createDraftReplyAllMessage(_ message: MSOutlookMessage, completionHandler:@escaping ((MSOutlookMessage, MSODataException?) -> Void )){
         
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
             
@@ -391,7 +422,6 @@ class Office365Manager {
             let messageOperations = (messageFetcher.operations as MSOutlookMessageOperations)
             
             let task = messageOperations.createReply(){ (replyMessage:MSOutlookMessage?, error:MSODataException?) -> Void in
-                
                 completionHandler(replyMessage!, error)
             }
             
