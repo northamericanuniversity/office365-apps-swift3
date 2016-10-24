@@ -207,8 +207,8 @@ class Office365Manager {
             // Retrieve mail messages from O365 and pass the status to the callback. Uses a default page size of 10
             // This results in a call to the service
             let userFetcher = outlookClient.getMe()
-            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getMessages()
-            messageCollectionFetcher.top(1000)
+            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getFolders().getById("Inbox").getMessages()
+            messageCollectionFetcher.top(10)
             messageCollectionFetcher.order(by: "DateTimeReceived desc")
             messageCollectionFetcher.select("*")
             
