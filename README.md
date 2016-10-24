@@ -1,5 +1,18 @@
 # office365-apps-swift3
-Intended to write all Office365 apps in Swift 3 
+Intended to write all Office365 API custom apps in Swift 3 
+
+
+<h3>SCREENSHOTS</h3>
+
+<table border='0' >
+<tr>
+<td>https://s3-us-west-2.amazonaws.com/s3-random-images/list_messages.png</td>
+<td>https://s3-us-west-2.amazonaws.com/s3-random-images/message_detail.png</td>
+<td>https://s3-us-west-2.amazonaws.com/s3-random-images/sendmessage_1.png</td>
+<td>https://s3-us-west-2.amazonaws.com/s3-random-images/sendmessage_2.png</td>
+</tr>
+</table>
+
 
 <h3>Office 365 Keys</h3>
 In AuhtenticationManager.swift file update your redirect url and client id
@@ -61,7 +74,6 @@ That short bridging file took us a long time to figure out!
 </pre>
 
 
-<h3>SCREENSHOTS</h3>
 
 <h3>API EXAMPLE</h3>
 
