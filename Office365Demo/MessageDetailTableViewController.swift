@@ -48,7 +48,6 @@ class MessageDetailTableViewController: UITableViewController, UIWebViewDelegate
                 print("Let's see: \(conversationMessage.from.emailAddress.address!) \(conversationMessage.conversationId!)")
             }
         }
-        
     }
 
     override func didReceiveMemoryWarning() {

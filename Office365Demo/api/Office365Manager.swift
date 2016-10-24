@@ -165,7 +165,7 @@ class Office365Manager {
     }
     
     
-    //Get the 10 most recent email messages in the user's inbox
+    //Get the conversation messages from a specific message
     func fetchMailMessagesByConversationId(_ message: MSOutlookMessage, completionHandler:@escaping (([Any]?, MSODataException?) -> Void)){
     
         // Get the MSOutlookClient. This object contains access tokens and methods to call the service
@@ -177,7 +177,6 @@ class Office365Manager {
             messageCollectionFetcher.order(by: "DateTimeReceived desc")
             messageCollectionFetcher.select("*")
             messageCollectionFetcher.filter("ConversationId eq '\(message.conversationId!)'")
-            
            
             let task = messageCollectionFetcher.read{(messages:[Any]?, error:MSODataException?) -> Void in
             
@@ -185,10 +184,7 @@ class Office365Manager {
             }
             
             task?.resume()
-        
         }
-        
-    
     }
     
     //Get the 10 most recent email messages in the user's inbox

@@ -246,4 +246,27 @@ In fact, you don't have the fetch the conversations on the fly as we do in the a
     }
 </pre>
 
+<pre>
+    //Get the conversation messages from a specific message
+    func fetchMailMessagesByConversationId(_ message: MSOutlookMessage, completionHandler:@escaping (([Any]?, MSODataException?) -> Void)){
+
+        // Get the MSOutlookClient. This object contains access tokens and methods to call the service
+        clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
+
+            let userFetcher = outlookClient.getMe()
+            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getFolders().getById("Inbox").getMessages()
+            messageCollectionFetcher.order(by: "DateTimeReceived desc")
+            messageCollectionFetcher.select("*")
+            messageCollectionFetcher.filter("ConversationId eq '\(message.conversationId!)'")
+
+            let task = messageCollectionFetcher.read{(messages:[Any]?, error:MSODataException?) -> Void in
+
+                completionHandler(messages, error)
+            }
+
+        task?.resume()
+        }
+    }
+</pre>
+
 
