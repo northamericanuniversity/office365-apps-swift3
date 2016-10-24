@@ -1,6 +1,6 @@
 # office365-apps-swift3
 Intended to write all Office365 API custom apps in Swift 3 
-
+Currently, only Email API is used extensively
 
 <h3>SCREENSHOTS</h3>
 
@@ -48,13 +48,13 @@ end
 
 <h3>INSTALL COCOAPOD</h3>
 
-Assuming you already have some experience with CocoaPod environment, please follow these steps
+Assuming you already have some experience with <a href='https://cocoapods.org/'>CocoaPod</a>  environment, please follow these steps
 
 - Open your shell and go to under Office365Demo folder and run
-<code>pod Install</code>
+<code>$ pod Install</code>
 
 - If you already have this project and updated version of Pod, then run
-<code>pod update</code>
+<code>$ pod update</code>
 
 <h3>BRIDGING HEADER FILE</h3>
 That short bridging file took us a long time to figure out!
@@ -150,9 +150,10 @@ Let's see how the sendMailMessage looks like
 Office365Manager.swift contains many ready to go functions. 
 
 To fetch to first 10 mails from Inbox
-    <pre>
+<pre>
     //Get the 10 most recent email messages in the user's inbox
     func fetchMailMessages(_ completionHandler:@escaping (([Any]?, MSODataException?) -> Void)) {
+        
         // Get the MSOutlookClient. This object contains access tokens and methods to call the service
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
         // Retrieve mail messages from O365 and pass the status to the callback. Uses a default page size of 10
@@ -165,11 +166,10 @@ To fetch to first 10 mails from Inbox
 
 
         let task = messageCollectionFetcher.read{(messages:[Any]?, error:MSODataException?) -> Void in
-        self.lastrefreshdate = Date()
-        self.allMessages = messages as! [MSOutlookMessage]
-        self.allConversations = self.getConversationsFromMessages(self.allMessages)
-
-        completionHandler(messages, error)
+            self.lastrefreshdate = Date()
+            self.allMessages = messages as! [MSOutlookMessage]
+            self.allConversations = self.getConversationsFromMessages(self.allMessages)
+            completionHandler(messages, error)
         }
 
         task?.resume()
