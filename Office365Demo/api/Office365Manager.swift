@@ -230,7 +230,6 @@ class Office365Manager {
         
         // Get the MSOutlookClient. This object contains access tokens and methods to call the service
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
-            
             let userFetcher = outlookClient.getMe()
             let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getFolders().getById(folder).getMessages()
             messageCollectionFetcher.order(by: orderBy)
@@ -242,27 +241,24 @@ class Office365Manager {
             let task = messageCollectionFetcher.read{(messages:[Any]?, error:MSODataException?) -> Void in
                 self.lastrefreshdate = Date()
                 
-                    //append additional messages
-                    let additionalMessages: [MSOutlookMessage] = messages as! [MSOutlookMessage]
-                    for additionalMessage in additionalMessages {
-                            self.allMessages.append(additionalMessage)
+                //append additional messages
+                let additionalMessages: [MSOutlookMessage] = messages as! [MSOutlookMessage]
+                for additionalMessage in additionalMessages {
+                        self.allMessages.append(additionalMessage)
+                }
+                
+                //append additional conversations
+                let additionalConversations = self.getConversationsFromMessages(additionalMessages)
+                for additionalConversation in additionalConversations {
+                    if(!self.allConversations.contains(where: {$0.newestMessage().hash == additionalConversation.newestMessage().hash})){
+                        self.allConversations.append(additionalConversation)
                     }
-                
-                
-                    //append additional conversations
-                    let additionalConversations = self.getConversationsFromMessages(additionalMessages)
-                    for additionalConversation in additionalConversations {
-                        if(!self.allConversations.contains(where: {$0.newestMessage().hash == additionalConversation.newestMessage().hash})){
-                            self.allConversations.append(additionalConversation)
-                        }
-                    }
-                    
-                
+                }
+        
                 completionHandler(messages, error)
             }
             
             task?.resume()
-            
         }
         
     }

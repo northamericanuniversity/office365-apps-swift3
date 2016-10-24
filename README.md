@@ -135,13 +135,12 @@ To fetch to first 10 mails from Inbox
     <pre>
     //Get the 10 most recent email messages in the user's inbox
     func fetchMailMessages(_ completionHandler:@escaping (([Any]?, MSODataException?) -> Void)) {
-
         // Get the MSOutlookClient. This object contains access tokens and methods to call the service
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
         // Retrieve mail messages from O365 and pass the status to the callback. Uses a default page size of 10
         // This results in a call to the service
         let userFetcher = outlookClient.getMe()
-        let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getFolders().getById("Inbox").getMessages()
+        let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getFolders().getById("<b>Inbox</b>").getMessages()
         messageCollectionFetcher.top(10)
         messageCollectionFetcher.order(by: "DateTimeReceived desc")
         messageCollectionFetcher.select("*")
@@ -162,5 +161,49 @@ To fetch to first 10 mails from Inbox
 
 
 To fetch from "SentItems", just change the folder name <code>userFetcher!.getFolders().getById("<b>SentItems</b>").getMessages()</code>
+
+
+In the app we actually fetch by page number, page size, order by and folder name
+
+<pre>
+    //fetch email messages based on pagenumber
+    func fetchMailMessagesForPageNumber(_ pageNumber: Int32, pageSize: Int32, orderBy: String, folder: String, completionHandler:@escaping (([Any]?, MSODataException?) -> Void)) {
+
+        // Get the MSOutlookClient. This object contains access tokens and methods to call the service
+        clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
+            let userFetcher = outlookClient.getMe()
+            let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getFolders().getById(folder).getMessages()
+            messageCollectionFetcher.order(by: orderBy)
+            messageCollectionFetcher.top(pageSize)
+            messageCollectionFetcher.skip(pageNumber * pageSize)
+            messageCollectionFetcher.select("*")
+
+            //retrieve messages
+            let task = messageCollectionFetcher.read{(messages:[Any]?, error:MSODataException?) -> Void in
+                self.lastrefreshdate = Date()
+
+                //append additional messages
+                let additionalMessages: [MSOutlookMessage] = messages as! [MSOutlookMessage]
+                for additionalMessage in additionalMessages {
+                    self.allMessages.append(additionalMessage)
+                }
+
+                //append additional conversations
+                let additionalConversations = self.getConversationsFromMessages(additionalMessages)
+                for additionalConversation in additionalConversations {
+                    if(!self.allConversations.contains(where: {$0.newestMessage().hash == additionalConversation.newestMessage().hash})){
+                        self.allConversations.append(additionalConversation)
+                    }
+                }
+
+                completionHandler(messages, error)
+            }
+
+            task?.resume()
+        }
+
+    }
+</pre>
+
 
 
