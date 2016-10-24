@@ -5,6 +5,12 @@ Intended to write all Office365 API custom apps in Swift 3
 <h3>SCREENSHOTS</h3>
 
 <table border='0' width='100%' >
+<th>
+<td>List Emails</td>
+<td>Lookup Email Detail</td>
+<td>Send Email</td>
+<td>Send Email</td>
+</th>
 <tr>
 <td><img src='https://s3-us-west-2.amazonaws.com/s3-random-images/list_messages.png'></td>
 <td><img src='https://s3-us-west-2.amazonaws.com/s3-random-images/message_detail.png'></td>
