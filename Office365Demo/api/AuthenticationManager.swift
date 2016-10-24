@@ -104,11 +104,6 @@ class AuthenticationManager{
             
         }
         
-        //        authContext.acquireTokenWithResource(resourceId, clientId: clientId, redirectUri: redirectURL!){(result:ADAuthenticationCallback!) -> Void in
-        //
-        //        }
-        
-        
     }
     
     // Clear the ADAL token cache and remove this application's cookies.

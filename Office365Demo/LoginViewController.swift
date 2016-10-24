@@ -10,13 +10,15 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var btnConnect: Office365LoginButton!
+    
+    
     var baseController = Office365ClientFetcher()
     var serviceEndpointLookup = NSMutableDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +60,7 @@ class LoginViewController: UIViewController {
                         serviceEndpointLookup[serviceEndpoint.capability] = serviceEndpoint.serviceEndpointUri
                          serviceEndpointLookup[serviceEndpoint.capability+"ResourceID"] = serviceEndpoint.serviceResourceId
                         
+                        //let's see which endpoints we have
                         print("serviceEndpoint.capability: \(serviceEndpoint.capability) serviceEndpointUri: \(serviceEndpoint.serviceEndpointUri) serviceResourceID: \(serviceEndpoint.serviceResourceId)")
                         
                     }
@@ -71,10 +74,7 @@ class LoginViewController: UIViewController {
                         let userEmail = userDefaults.string(forKey: "demo_email")!
                         print("user email: \(userEmail)")
                         
-//                        let mainTabBar : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("mainTabBarController") as! UITabBarController;
-                        
                         let navMessagesView : UINavigationController = self.storyboard?.instantiateViewController(withIdentifier: "navMessagesView") as! UINavigationController
-                        
                         self.present(navMessagesView, animated: true, completion: nil)
                         
                     }

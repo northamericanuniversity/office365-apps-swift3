@@ -12,7 +12,9 @@ class MessageDetailTableViewCell: UITableViewCell {
 
    
     @IBOutlet weak var mBodyView: UIWebView!
-    
+    @IBOutlet weak var mReply: UIButton!
+    @IBOutlet weak var mReplyAll: UIButton!
+    @IBOutlet weak var mForward: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

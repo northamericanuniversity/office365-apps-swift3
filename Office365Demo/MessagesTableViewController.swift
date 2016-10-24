@@ -16,15 +16,17 @@ class MessagesTableViewController: UITableViewController {
     var activityIndicator: UIActivityIndicatorView!
     var primaryStatusLabel: UILabel!
     var secondaryStatusLabel: UILabel!
-    
     var isLoading : Bool = false
-    let office365Manager: Office365Manager = Office365Manager()
+    var office365Manager: Office365Manager = Office365Manager()
     
     var currentPage : Int32 = 0 //default page number is zero (0)
+    let PAGESIZE: Int32 = 10
     var actionSheetController : UIAlertController!
     
     var selectedOutlookMessage: MSOutlookMessage?
     var selectedConversation: Conversation?
+    
+    var allConversations: [Conversation] = [Conversation]()
     
     
     override func viewDidLoad() {
@@ -47,6 +49,19 @@ class MessagesTableViewController: UITableViewController {
             
         }
         actionSheetController.addAction(cancelAction)//add action to the alert controller
+        
+        
+        //compose Email
+        let composeAction = UIAlertAction(title: "Compose", style: .default) { (action) in
+            
+            //show navCompose navigation to the ComposeViewController
+            let navCompose: UINavigationController = self.storyboard?.instantiateViewController(withIdentifier: "navCompose") as! UINavigationController
+            let composeView : ComposeTableViewController = navCompose.viewControllers.first as! ComposeTableViewController
+            composeView.message = nil
+            composeView.composeType = ComposeType.Compose.rawValue
+            self.present(navCompose, animated:true, completion:nil)
+        }
+        actionSheetController.addAction(composeAction)
         
         //sign out
         let signoutAction = UIAlertAction(title: "Sign out", style: .default) { (action) in
@@ -122,6 +137,10 @@ class MessagesTableViewController: UITableViewController {
         }
         
         currentPage = 0
+        office365Manager.allConversations = []
+        office365Manager.allMessages = []
+        office365Manager.messagesByConversationID = [:]
+        office365Manager.conversations = []
         performFetchMailMessages()
         
     }
@@ -167,15 +186,17 @@ class MessagesTableViewController: UITableViewController {
         }****************** END: Alternative way to get only 10 messags by default ****************/
         
         
+        
         //get email messages by page number
-        office365Manager.fetchMailMessagesForPageNumber(currentPage, pageSize: 10, orderBy: "DateTimeReceived desc", folder: "Inbox") { (messages: [Any]?, error: MSODataException?) in
+        office365Manager.fetchMailMessagesForPageNumber(currentPage, pageSize: PAGESIZE, orderBy: "DateTimeReceived desc", folder: "Inbox") { (messages: [Any]?, error: MSODataException?) in
         
             
-            self.office365Manager.fetchMailMessagesForPageNumber(self.currentPage, pageSize: 10, orderBy: "DateTimeReceived desc", folder: "SentItems") { (messages: [Any]?, error: MSODataException?) in
+//            self.office365Manager.fetchMailMessagesForPageNumber(self.currentPage, pageSize: self.PAGESIZE, orderBy: "DateTimeReceived desc", folder: "SentItems") { (messages: [Any]?, error: MSODataException?) in
             
-                 
-                
                     DispatchQueue.main.async {
+                        
+                        self.allConversations = self.office365Manager.allConversations
+                        
                         self.tableView.reloadData()
                         self.refreshControl?.endRefreshing()
                         self.isLoading = false
@@ -185,11 +206,11 @@ class MessagesTableViewController: UITableViewController {
                         if let lastUpdatedDate: Date = self.office365Manager.lastrefreshdate {
                             secondaryMessage = "Last updated on \(lastUpdatedDate.o365_string_from_date())"
                         }
-                        primaryMessage = "fetched latest \(self.office365Manager.allConversations.count) messages"
+                        primaryMessage = "fetched latest \(self.allConversations.count) messages"
                         self.updateStatusWithPrimaryMessage(primaryMessage, secondaryMessage: secondaryMessage, activityInProgress: false)
                     }//DispatchQueue
                 
-                }//SentItems
+                //}//SentItems
         }//Inbox
         
     }//performFetchMailMessages
@@ -199,7 +220,7 @@ class MessagesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return office365Manager.allConversations.count
+        return allConversations.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -212,13 +233,9 @@ class MessagesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let conversation : Conversation = office365Manager.allConversations[(indexPath as NSIndexPath).section]
+        let conversation : Conversation = allConversations[(indexPath as NSIndexPath).section]
         let outlookmessage = conversation.newestMessage() //latest message
         selectedOutlookMessage = outlookmessage
-        if(selectedOutlookMessage == nil){
-            print("selectedOutlookMessage here is nil")
-        }
-        
         selectedConversation = conversation
         self.performSegue(withIdentifier: "showdetails", sender: nil)
         
@@ -226,12 +243,11 @@ class MessagesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if (indexPath as NSIndexPath).section == (office365Manager.allConversations.count - 1) && !isLoading {
-            print("come to the last row")
+        if (indexPath as NSIndexPath).section == (allConversations.count - 1) && !isLoading {
             isLoading = true
             currentPage += 1
+            print("currentPage: \(currentPage)")
             performFetchMailMessages()
-            
         }
     }
     
@@ -240,15 +256,16 @@ class MessagesTableViewController: UITableViewController {
         // Configure the cell...
         let cell = tableView.dequeueReusableCell(withIdentifier: "messagecell", for: indexPath) as! MessagesTableViewCell
        
-        let conversation : Conversation = office365Manager.allConversations[(indexPath as NSIndexPath).section]
+        let conversation : Conversation = allConversations[(indexPath as NSIndexPath).section]
         conversation.sortMessages()
-        let outlookmessage = conversation.newestMessage() //latest message
+        let outlookmessage = conversation.oldestMessage() //latest message
         
         
         cell.lblSubject.text = outlookmessage.subject //subject
         cell.lblSender.text = outlookmessage.from.emailAddress.name //person's name
         cell.lblDateRecieved.text = outlookmessage.dateTimeReceived.o365_string_from_date() // date received
         cell.viewMessageState.backgroundColor = (outlookmessage.isRead && conversation.unreadMessages.count == 0) ? UIColor.clear : UIColor().o365_PrimaryColor() //if new unread email
+        
         //if there is an attachment
         cell.imgAttachment.isHidden = (outlookmessage.hasAttachments) ? false : true
         //hide if importance is not high, otherwie show it
@@ -268,7 +285,15 @@ class MessagesTableViewController: UITableViewController {
     /*************** END: just pump up the action sheet *****************/
 
     
-    
+    /****************** START: unwind exit or close actions to the viewcontroller **********************/
+    @IBAction func unwindToViewController(_ segue: UIStoryboardSegue) {
+        
+        if(segue.source.isKind(of: Office365Demo.ComposeTableViewController)){//message detail vc
+            //TO DO: use if needed in the future
+        }
+    }
+    /****************** END: unwind exit or close actions to the viewcontroller *************************/
+
     
     
     // MARK: - Navigation
@@ -277,10 +302,6 @@ class MessagesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if(segue.identifier == "showdetails"){
-//            let messageDetailViewController: MessageDetailViewController =  segue.destination as!  MessageDetailViewController
-//            messageDetailViewController.message = selectedOutlookMessage
-//            messageDetailViewController.conversation = selectedConversation
-            
             let messageDetailTableViewController: MessageDetailTableViewController =  segue.destination as!  MessageDetailTableViewController
             messageDetailTableViewController.conversation = selectedConversation
             messageDetailTableViewController.message = selectedOutlookMessage
