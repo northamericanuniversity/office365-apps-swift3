@@ -173,10 +173,10 @@ In the app we actually fetch by page number, page size, order by and folder name
         clientFetcher.fetchOutlookClient { (outlookClient) -> Void in
             let userFetcher = outlookClient.getMe()
             let messageCollectionFetcher : MSOutlookMessageCollectionFetcher = userFetcher!.getFolders().getById(folder).getMessages()
-            messageCollectionFetcher.order(by: orderBy)
+            <b>messageCollectionFetcher.order(by: orderBy)
             messageCollectionFetcher.top(pageSize)
             messageCollectionFetcher.skip(pageNumber * pageSize)
-            messageCollectionFetcher.select("*")
+            messageCollectionFetcher.select("*")</b>
 
             //retrieve messages
             let task = messageCollectionFetcher.read{(messages:[Any]?, error:MSODataException?) -> Void in
@@ -205,5 +205,45 @@ In the app we actually fetch by page number, page size, order by and folder name
     }
 </pre>
 
+We get the conversations of each email on the fly. 
+messagesByConversationID and conversations are defined as global
+<pre>
+    var messagesByConversationID : NSMutableDictionary = [:]
+    var conversations: NSMutableArray = NSMutableArray()
+
+    func getConversationsFromMessages(_ messages: [MSOutlookMessage]) -> [Conversation] {
+
+        for (_,message) in messages.enumerated() {
+            var messagQue = messagesByConversationID[message.conversationId!]
+            if(messagQue == nil){
+                messagQue = NSMutableArray()
+                messagesByConversationID[message.conversationId!] = messagQue
+            }
+            (messagQue as! NSMutableArray).add(message)
+        }
+
+        for value  in messagesByConversationID.allValues {
+            let messages: NSMutableArray = value as! NSMutableArray
+            let conversation : Conversation = Conversation(messages: messages)
+            conversations.add(conversation)
+        }
+
+        return conversations.sortedArray(using: #selector(NSNumber.compare(_:))) as! [Conversation]
+    }
+</pre>
+
+In fact, you don't have the fetch the conversations on the fly as we do in the app. In each email detail lookup you can fetch the conversations from the <b>conversationId</b> retrieved from the MSOutlookMessage object
+<pre>
+    func fetchConversationMessages(){
+        office365Manager.fetchMailMessagesByConversationId(message) { (conversationMessages: [Any]?, error: MSODataException?) in
+
+            let conversations: [MSOutlookMessage] = conversationMessages as! [MSOutlookMessage]
+
+            for conversationMessage in conversations{
+                print("\(conversationMessage.from.emailAddress.address!) \(conversationMessage.conversationId!)")
+            }
+        }
+    }
+</pre>
 
 

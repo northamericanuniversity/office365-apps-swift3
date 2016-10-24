@@ -26,24 +26,16 @@ class Office365Manager {
     
     func getConversationsFromMessages(_ messages: [MSOutlookMessage]) -> [Conversation] {
         
-        //let messagesByConversationID : NSMutableDictionary = [:]
-        //let filteredMessages: NSArray = messages.filteredArrayUsingPredicate(NSPredicate(format: "isHidden == false"))
-        
         for (_,message) in messages.enumerated() {
             var messagQue = messagesByConversationID[message.conversationId!]
             if(messagQue == nil){
-                //print("messagQue: index==> \(index)  message.conversationId: \(message.conversationId!)")
                 messagQue = NSMutableArray()
                 messagesByConversationID[message.conversationId!] = messagQue
             }
             (messagQue as! NSMutableArray).add(message)
         }
         
-        
-        //let conversations: NSMutableArray = NSMutableArray()
-        
-        for (_,value)  in messagesByConversationID.allValues.enumerated()  {
-            //print("messagesByConversationID index==> \(index)")
+        for value  in messagesByConversationID.allValues {
             let messages: NSMutableArray = value as! NSMutableArray
             let conversation : Conversation = Conversation(messages: messages)
             conversations.add(conversation)
