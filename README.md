@@ -56,8 +56,10 @@ Assuming you already have some experience with <a href='https://cocoapods.org/'>
 - If you already have this project and updated version of Pod, then run
 <code>$ pod update</code>
 
+- Close the Xcode Office365Demo project and click Office365Demo.xcworkspace to re-open with pod  
+
 <h3>BRIDGING HEADER FILE</h3>
-That short bridging file took us a long time to figure out!
+The bridging file took us a long time to figure out!
 <pre>
 #ifndef Bridging_Header_h
 #define Bridging_Header_h
